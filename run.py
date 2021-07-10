@@ -29,7 +29,6 @@ def get_sales_data():
         if validate_data(sales_data):
             print("Data is valid!")
             break
-
     return sales_data    
 
 def validate_data(values):
@@ -70,7 +69,12 @@ def calculate_surplus_data(sales_row):
     print("Calculating surplus data. . .\n")
     stock = SHEET.worksheet("stock").get_all_values()
     stock_row = stock[-1]
-    print(stock_row)
+    
+    surplus_data = []
+    for stock, sales in zip(stock_row, sales_row):
+        surplus = int(stock) - sales
+        surplus_data.append(surplus)
+    print(surplus)
 
 def main():
     """
